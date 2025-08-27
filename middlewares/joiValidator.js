@@ -27,3 +27,14 @@ exports.signinSchema = joi.object({
         .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*d).{8,}$'))
         
 })
+
+exports.acceptCodeSchema = joi.object({
+    email: joi.string()
+         .min(6)
+        .max(60)
+        .required()
+        .email({
+            tlds:{allow:['com','net','org']}
+        }),
+        providedCode: joi.number()
+})
