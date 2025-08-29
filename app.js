@@ -1,5 +1,5 @@
 
-
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -7,8 +7,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 const authRouter = require('./routes/authRouter')
-
-require('dotenv').config();
+const postsRouter = require('./routes/postsRouter')
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(cookieParser());
 app.use(helmet());
-app.use(authRouter)
+
 
 
 // Routes
@@ -26,6 +25,8 @@ app.use(authRouter)
 
 // app.use('/api/example', require('./routes/exampleRoute'));
 app.use('/api/auth',authRouter)
+app.use('/api/posts',postsRouter)
+
 app.get('/', (req, res) => {
   res.json({message:'💼 Murphy Backend is Live'});
 });
